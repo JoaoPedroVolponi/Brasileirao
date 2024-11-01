@@ -8,9 +8,24 @@ import UIKit
 import WebKit
 
 class TeamCell: UITableViewCell {
-    private let teamWebView = WKWebView()
-    private let teamNameLabel = UILabel()
-    private let pointsLabel = UILabel()
+    
+    lazy var teamWebView: WKWebView = {
+       let webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        return webView
+    }()
+    
+    lazy var teamNameLabel: UILabel = {
+       let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var pointsLabel: UILabel = {
+       let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,10 +40,6 @@ class TeamCell: UITableViewCell {
         contentView.addSubview(teamWebView)
         contentView.addSubview(teamNameLabel)
         contentView.addSubview(pointsLabel)
-
-        
-        teamNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        pointsLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             teamWebView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
