@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		58A199CC2CD471D900B591F3 /* SwiftSVG in Frameworks */ = {isa = PBXBuildFile; productRef = 58A199CB2CD471D900B591F3 /* SwiftSVG */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		588526DA2CCF2A350084EFB5 /* Brasileirao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brasileirao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58A199CC2CD471D900B591F3 /* SwiftSVG in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = Brasileirao;
 			packageProductDependencies = (
+				58A199CB2CD471D900B591F3 /* SwiftSVG */,
 			);
 			productName = Brasileirao;
 			productReference = 588526DA2CCF2A350084EFB5 /* Brasileirao.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 588526D12CCF2A350084EFB5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				58A199CA2CD471D900B591F3 /* XCRemoteSwiftPackageReference "SwiftSVG" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 588526DB2CCF2A350084EFB5 /* Products */;
 			projectDirPath = "";
@@ -331,6 +340,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		58A199CA2CD471D900B591F3 /* XCRemoteSwiftPackageReference "SwiftSVG" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mchoe/SwiftSVG.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		58A199CB2CD471D900B591F3 /* SwiftSVG */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58A199CA2CD471D900B591F3 /* XCRemoteSwiftPackageReference "SwiftSVG" */;
+			productName = SwiftSVG;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 588526D22CCF2A350084EFB5 /* Project object */;
 }

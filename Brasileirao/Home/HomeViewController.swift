@@ -5,7 +5,7 @@
 //  Created by João Pedro Volponi on 27/10/24.
 //
 
-import UIKit    
+import UIKit
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let tableView = UITableView()
@@ -42,7 +42,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     self.viewModel.teams = teams
                     self.tableView.reloadData()
                 } else {
-                    // Tratar erro
                     self.showErrorAlert()
                 }
             }
