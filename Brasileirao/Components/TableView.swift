@@ -4,76 +4,67 @@
 //
 //  Created by João Pedro Volponi on 27/10/24.
 
-
 import UIKit
-import SwiftSVG
+import WebKit
 
 class TeamCell: UITableViewCell {
-    private let teamSVGView = UIView()
-    private let teamNameLabel = UILabel()
-    private let pointsLabel = UILabel()
+    
+    lazy var teamWebView: WKWebView = {
+       let webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        return webView
+    }()
+    
+    lazy var teamNameLabel: UILabel = {
+       let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var pointsLabel: UILabel = {
+       let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupViews() {
-        teamSVGView.contentMode = .scaleAspectFit
-        teamSVGView.translatesAutoresizingMaskIntoConstraints = false
-        teamNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        teamNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        pointsLabel.font = UIFont.systemFont(ofSize: 14)
-        pointsLabel.textColor = .gray
-        pointsLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        contentView.addSubview(teamSVGView)
+        contentView.addSubview(teamWebView)
         contentView.addSubview(teamNameLabel)
         contentView.addSubview(pointsLabel)
         
         NSLayoutConstraint.activate([
-            teamSVGView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            teamSVGView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            teamSVGView.widthAnchor.constraint(equalToConstant: 40),
-            teamSVGView.heightAnchor.constraint(equalToConstant: 40),
+            teamWebView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            teamWebView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            teamWebView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
+            teamWebView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1),
             
-            teamNameLabel.leadingAnchor.constraint(equalTo: teamSVGView.trailingAnchor, constant: 10),
-            teamNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            
-            pointsLabel.leadingAnchor.constraint(equalTo: teamNameLabel.leadingAnchor),
-            pointsLabel.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor, constant: 5),
-            pointsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            teamWebView.widthAnchor.constraint(equalToConstant: 30),
+            teamWebView.heightAnchor.constraint(equalToConstant: 30),
+
+            teamNameLabel.leadingAnchor.constraint(equalTo: teamWebView.trailingAnchor, constant: 10),
+            teamNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+
+            pointsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            pointsLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
-    
+
     func configure(with team: TeamResponse) {
         teamNameLabel.text = team.time.nomePopular
-        pointsLabel.text = "Posição: \(team.posicao) - Pontos: \(team.pontos)"
+        pointsLabel.text = "Pontos: \(team.pontos)"
         
-        guard let url = URL(string: team.time.escudo) else {
-            return
+        if let url = URL(string: team.time.escudo) {
+            let request = URLRequest(url: url)
+            teamWebView.load(request)
         }
-
-        teamSVGView.subviews.forEach { $0.removeFromSuperview() }
-        
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let self = self, let data = data, error == nil else {
-                print("Erro ao carregar SVG: \(String(describing: error))")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                let svgView = UIView(SVGData: data) { image in
-                    image.resizeToFit(self.teamSVGView.bounds)
-                }
-                svgView.frame = self.teamSVGView.bounds
-                svgView.contentMode = .scaleAspectFit
-                self.teamSVGView.addSubview(svgView)
-            }
-        }.resume()
     }
 }
