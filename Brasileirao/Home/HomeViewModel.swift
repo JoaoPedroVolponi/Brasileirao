@@ -8,16 +8,7 @@
 import Foundation
 import UIKit
 
-protocol HomeViewModelProtocol {
-    
-}
-
-class HomeViewModel: HomeViewModelProtocol {
-    
-}
-
-
-class TeamsViewModel {
+class HomeViewModel {
     var teams = [TeamResponse]()
     private let apiUrl = "https://api.api-futebol.com.br/v1/campeonatos/10/tabela"
     private let token = "live_e5e47ff78fc275d4160d15277ccebe"
@@ -45,3 +36,4 @@ class TeamsViewModel {
         }.resume()
     }
 }
+
