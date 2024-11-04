@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TeamCell.self, forCellReuseIdentifier: "TeamCell")
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "TeamCell")
         
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as! TeamCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as! TableViewCell
         let team = viewModel.teams[indexPath.row]
         cell.configure(with: team)
         return cell

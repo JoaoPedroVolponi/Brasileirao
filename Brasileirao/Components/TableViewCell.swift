@@ -7,7 +7,7 @@
 import UIKit
 import WebKit
 
-class TeamCell: UITableViewCell {
+class TableViewCell: UITableViewCell {
     
     lazy var teamWebView: WKWebView = {
         let webView = WKWebView()
