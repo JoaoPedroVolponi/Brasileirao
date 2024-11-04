@@ -7,13 +7,17 @@
 import UIKit
 import WebKit
 
-class TeamCell: UITableViewCell {
+class TableViewCell: UITableViewCell {
     
     lazy var teamWebView: WKWebView = {
-       let webView = WKWebView()
+        let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.backgroundColor = .clear
+        webView.scrollView.isScrollEnabled = false
+        webView.contentMode = .scaleAspectFit
         return webView
     }()
+
     
     lazy var teamNameLabel: UILabel = {
        let label = UILabel()
@@ -30,6 +34,7 @@ class TeamCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
+        configConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -40,16 +45,15 @@ class TeamCell: UITableViewCell {
         contentView.addSubview(teamWebView)
         contentView.addSubview(teamNameLabel)
         contentView.addSubview(pointsLabel)
-        
+    }
+    
+    private func configConstraints() {
         NSLayoutConstraint.activate([
-            teamWebView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            teamWebView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            teamWebView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
-            teamWebView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1),
-            
             teamWebView.widthAnchor.constraint(equalToConstant: 30),
             teamWebView.heightAnchor.constraint(equalToConstant: 30),
-
+            teamWebView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            teamWebView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            
             teamNameLabel.leadingAnchor.constraint(equalTo: teamWebView.trailingAnchor, constant: 10),
             teamNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 
