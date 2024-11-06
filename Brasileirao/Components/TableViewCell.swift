@@ -9,16 +9,15 @@ import WebKit
 
 class TableViewCell: UITableViewCell {
     
-    lazy var teamWebView: WKWebView = {
-        let webView = WKWebView()
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.backgroundColor = .clear
-        webView.scrollView.isScrollEnabled = false
-        webView.contentMode = .scaleAspectFit
-        return webView
+    private var currentIndexPath: IndexPath?
+    
+    lazy var teamImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
 
-    
     lazy var teamNameLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -30,11 +29,11 @@ class TableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
-        configConstraints()
+        setupConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -42,19 +41,19 @@ class TableViewCell: UITableViewCell {
     }
 
     private func setupViews() {
-        contentView.addSubview(teamWebView)
+        contentView.addSubview(teamImageView)
         contentView.addSubview(teamNameLabel)
         contentView.addSubview(pointsLabel)
     }
     
-    private func configConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            teamWebView.widthAnchor.constraint(equalToConstant: 30),
-            teamWebView.heightAnchor.constraint(equalToConstant: 30),
-            teamWebView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            teamWebView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            teamImageView.widthAnchor.constraint(equalToConstant: 30),
+            teamImageView.heightAnchor.constraint(equalToConstant: 30),
+            teamImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            teamImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
-            teamNameLabel.leadingAnchor.constraint(equalTo: teamWebView.trailingAnchor, constant: 10),
+            teamNameLabel.leadingAnchor.constraint(equalTo: teamImageView.trailingAnchor, constant: 10),
             teamNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 
             pointsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
@@ -62,13 +61,14 @@ class TableViewCell: UITableViewCell {
         ])
     }
 
-    func configure(with team: TeamResponse) {
-        teamNameLabel.text = team.time.nomePopular
-        pointsLabel.text = "Pontos: \(team.pontos)"
-        
-        if let url = URL(string: team.time.escudo) {
-            let request = URLRequest(url: url)
-            teamWebView.load(request)
-        }
+    func configure(with teamName: String, logoURL: String, indexPath: IndexPath) {
+        teamNameLabel.text = teamName
+        currentIndexPath = indexPath
+        loadSVG(from: logoURL)
+    }
+    
+    private func loadSVG(from urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        teamImageView.sd_setImage(with: url, placeholderImage: nil, options: .highPriority, context: [.imageThumbnailPixelSize: CGSize(width: 30, height: 30)])
     }
 }
