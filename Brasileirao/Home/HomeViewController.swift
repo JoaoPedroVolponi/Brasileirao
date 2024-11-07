@@ -16,11 +16,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TeamCell")
+        tableView.register(TableHeaderView.self, forHeaderFooterViewReuseIdentifier: "TableHeaderView")
         return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Brasileirão"
         setupTableView()
         setupConstraints()
         fetchTeams()
@@ -48,9 +50,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-
     }
 
+    // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.teams.count
     }
@@ -58,7 +61,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as! TableViewCell
         let teamResponse = viewModel.teams[indexPath.row]
-        cell.configure(with: teamResponse.time.nome, logoURL: teamResponse.time.escudo, indexPath: indexPath)
+        cell.configure(with: teamResponse, indexPath: indexPath)
         return cell
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TableHeaderView") as? TableHeaderView
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
     }
 }
