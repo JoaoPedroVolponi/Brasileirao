@@ -30,14 +30,13 @@ struct TeamResponse: Decodable {
 
 struct Team: Decodable {
     let timeId: Int
-    let nomePopular: String
+    let nome: String
     let sigla: String
     let escudo: String
 
     enum CodingKeys: String, CodingKey {
         case timeId = "time_id"
-        case nomePopular = "nome_popular"
+        case nome = "nome_popular"
         case sigla, escudo
     }
 }
-
