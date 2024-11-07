@@ -15,14 +15,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: "TeamCell")
-        tableView.register(TableHeaderView.self, forHeaderFooterViewReuseIdentifier: "TableHeaderView")
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: BrasileiraoEnum.teamCellIdentifier)
+        tableView.register(TableHeaderView.self, forHeaderFooterViewReuseIdentifier: BrasileiraoEnum.tableHeaderIdentifier)
         return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Brasileirão"
+        self.navigationItem.title = BrasileiraoEnum.title
         setupTableView()
         setupConstraints()
         fetchTeams()
@@ -59,7 +59,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: BrasileiraoEnum.teamCellIdentifier, for: indexPath) as! TableViewCell
         let teamResponse = viewModel.teams[indexPath.row]
         cell.configure(with: teamResponse, indexPath: indexPath)
         return cell
@@ -68,7 +68,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TableHeaderView") as? TableHeaderView
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: BrasileiraoEnum.tableHeaderIdentifier) as? TableHeaderView
         return header
     }
 
