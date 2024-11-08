@@ -10,11 +10,10 @@ import UIKit
 
 class HomeViewModel {
     var teams = [TeamResponse]()
-    private let apiUrl = "https://api.api-futebol.com.br/v1/campeonatos/10/tabela"
     private let token = "live_e5e47ff78fc275d4160d15277ccebe"
 
     func fetchTeams(completion: @escaping ([TeamResponse]?) -> Void) {
-        guard let url = URL(string: apiUrl) else { return }
+        guard let url = URL(string: BrasileiraoEnum.url) else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
