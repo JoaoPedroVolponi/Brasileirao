@@ -10,7 +10,7 @@ import UIKit
 
 class HomeViewModel {
     var teams = [TeamResponse]()
-    private let token = "live_e5e47ff78fc275d4160d15277ccebe"
+    private let token = "SEU_TOKEN"
 
     func fetchTeams(completion: @escaping ([TeamResponse]?) -> Void) {
         guard let url = URL(string: BrasileiraoEnum.url) else { return }
