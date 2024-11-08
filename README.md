@@ -18,7 +18,7 @@
 | :------------: | :----------------------------------------: | :---------------------------------------: |
 | Screens | <img src="https://github.com/JoaoPedroVolponi/Assets/blob/main/brasileirao/splashScreen.png" width="220px;" height="400" /> | <img src="https://github.com/JoaoPedroVolponi/Assets/blob/main/brasileirao/Home.png" width="220px;" height="400" /> | />
 
-## ✨ Autores
+## ✨ Autor
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
