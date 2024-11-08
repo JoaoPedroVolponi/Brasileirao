@@ -12,7 +12,7 @@ class TableHeaderView: UITableViewHeaderFooterView {
     lazy var teamNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Clube"
+        label.text = BrasileiraoEnum.club
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
@@ -20,7 +20,7 @@ class TableHeaderView: UITableViewHeaderFooterView {
     lazy var pointsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "P"
+        label.text = BrasileiraoEnum.points
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
@@ -28,7 +28,7 @@ class TableHeaderView: UITableViewHeaderFooterView {
     lazy var gamesPlayedLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "J"
+        label.text = BrasileiraoEnum.games
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
@@ -36,7 +36,7 @@ class TableHeaderView: UITableViewHeaderFooterView {
     lazy var winsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "V"
+        label.text = BrasileiraoEnum.wins
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
@@ -44,7 +44,7 @@ class TableHeaderView: UITableViewHeaderFooterView {
     lazy var drawLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "E"
+        label.text = BrasileiraoEnum.draws
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
@@ -52,7 +52,7 @@ class TableHeaderView: UITableViewHeaderFooterView {
     lazy var lossesLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "D"
+        label.text = BrasileiraoEnum.losses
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
