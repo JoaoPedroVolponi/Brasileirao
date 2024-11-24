@@ -5,7 +5,7 @@
 
 ## 🛠️ Tecnologias e Ferramentas
 - Swift
-- Uikit
+- UIKit
 - MVC
 
 ## ▶️ Funcionalidades
